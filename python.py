@@ -33,13 +33,17 @@ def implicit():
 client = language.LanguageServiceClient()
 
 # The text to analyze
-text = u'This is where the magic happens'
+text = u'This is where the magic happens. My truck broke down.'
 document = types.Document(
     content=text,
     type=enums.Document.Type.PLAIN_TEXT)
 
 # Detects the sentiment of the text
-sentiment = client.analyze_sentiment(document=document).document_sentiment
+docSentiment = client.analyze_sentiment(document=document).document_sentiment
 
 print('Text: {}'.format(text))
-print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+print('Sentiment: {}, {}'.format(docSentiment.score, docSentiment.magnitude))
+
+for sentence in client.analyze_sentiment(document=document).sentences:
+	print (sentence.text.content)
+	print ('Sentiment: {}, {}'.format(sentence.sentiment.score, sentence.sentiment.magnitude))
