@@ -51,7 +51,27 @@ for sentence in client.analyze_sentiment(document=document).sentences:
 	print ('Sentiment: {}, {}'.format(sentence.sentiment.score, sentence.sentiment.magnitude))
 
 
-test = "hi"
+
+# METER ANALYSIS
+myheaders={
+    "X-Mashape-Key": "ghdyrk5qrEmshlQ4LTQ1yDLtFAuDp1GxyEtjsnuZJRUV8QSxJN",
+    "Accept": "application/json"} 
+
+input_sentence = "I got my first real six string"
+total_syllables = 0;
+for input_word in input_sentence.split():  
+    response = requests.get("https://wordsapiv1.p.mashape.com/words/{}/syllables".format(input_word), headers = myheaders)
+    print(response.text.syllables)
+    #total_syllables += response.count
+
+
+# myheaders={
+#     "X-Mashape-Key": "ghdyrk5qrEmshlQ4LTQ1yDLtFAuDp1GxyEtjsnuZJRUV8QSxJN",
+#     "Accept": "application/json"}   
+# response = requests.get("https://wordsapiv1.p.mashape.com/words/{}/syllables".format(test), headers = myheaders)
+# print(response.text)
+
+
 
 # These code snippets use an open-source library. http://unirest.io/python
 #print("https://wordsapiv1.p.mashape.com/words/{}".format(test))
@@ -61,8 +81,3 @@ test = "hi"
 #     "Accept": "application/json"
 #   }
 # )
-myheaders={
-    "X-Mashape-Key": "ghdyrk5qrEmshlQ4LTQ1yDLtFAuDp1GxyEtjsnuZJRUV8QSxJN",
-    "Accept": "application/json"}   
-response = requests.get("https://wordsapiv1.p.mashape.com/words/{}".format(test), headers = myheaders)
-print(response.text)
