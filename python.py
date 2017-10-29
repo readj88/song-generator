@@ -3,6 +3,8 @@ from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 
+import requests
+
 def implicit():
     from google.cloud import storage
 
@@ -47,3 +49,20 @@ print('Sentiment: {}, {}'.format(docSentiment.score, docSentiment.magnitude))
 for sentence in client.analyze_sentiment(document=document).sentences:
 	print (sentence.text.content)
 	print ('Sentiment: {}, {}'.format(sentence.sentiment.score, sentence.sentiment.magnitude))
+
+
+test = "hi"
+
+# These code snippets use an open-source library. http://unirest.io/python
+#print("https://wordsapiv1.p.mashape.com/words/{}".format(test))
+# response = requests.get("https://wordsapiv1.p.mashape.com/words/{}".format(test),
+#   headers={
+#     "X-Mashape-Key": "ghdyrk5qrEmshlQ4LTQ1yDLtFAuDp1GxyEtjsnuZJRUV8QSxJN",
+#     "Accept": "application/json"
+#   }
+# )
+myheaders={
+    "X-Mashape-Key": "ghdyrk5qrEmshlQ4LTQ1yDLtFAuDp1GxyEtjsnuZJRUV8QSxJN",
+    "Accept": "application/json"}   
+response = requests.get("https://wordsapiv1.p.mashape.com/words/{}".format(test), headers = myheaders)
+print(response.text)
